@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 class EmployeeController {
 
     @PreAuthorize("hasAuthority('APPROLE_User')")
-    @GetMapping(USER)
+    @GetMapping(HEALTH)
     fun health() :ResponseEntity<String>{
         return ResponseEntity.ok("Hello user! API Server")
     }

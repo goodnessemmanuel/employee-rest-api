@@ -15,11 +15,12 @@ Using Podman
 
 install podman if you don't have it already
 Install podman compose [here] if you don't have it already
-cd to this project directory and
-run: podman-compose -f docker-compose.yml up -d ::starts app
+cd to this project directory and run: 
+<br>```podman-compose -f docker-compose.yml up -d``` ::starts app
 
-podman ps ::to confirm container is running
-Goto http://localhost:8080/api/server/v1/user to check app
+<br>```podman ps``` ::to confirm container is running
+
+<br>Goto http://localhost:8080/api/server/v1/health to check app
 
 podman-compose down ::removes and destroy container
 
@@ -28,8 +29,9 @@ podman-compose down ::removes and destroy container
 Using docker
 
 install docker desktop if you don't have it already
-cd to this project directory and run: docker-compose up -d ::starts app with all dependencies
+cd to this project directory and run: 
+```docker-compose up -d ::starts app with all dependencies```
 
-docker ps ::to confirm container is running
-Goto http://localhost:8080/api/server/v1/user to check app
+```docker ps``` ::to confirm container is running
+<br>Goto http://localhost:8080/api/server/v1/health to check app
 docker-compose down
