@@ -17,7 +17,12 @@ class EmployeeController {
     @PreAuthorize("hasAuthority('APPROLE_User')")
     @GetMapping(HEALTH)
     fun health() :ResponseEntity<String>{
-        return ResponseEntity.ok("Hello user! API Server")
+        return ResponseEntity.ok("Hello! API Server")
+    }
+    @PreAuthorize("hasAuthority('APPROLE_User')")
+    @GetMapping(USER)
+    fun welcomeUser() :ResponseEntity<String>{
+        return ResponseEntity.ok("Hello User! API Server")
     }
     @PreAuthorize("hasAuthority('APPROLE_Admin')")
     @GetMapping(ADMIN)
