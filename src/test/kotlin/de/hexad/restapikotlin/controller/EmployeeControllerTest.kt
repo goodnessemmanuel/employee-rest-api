@@ -1,7 +1,7 @@
 package de.hexad.restapikotlin.controller
 
-import de.hexad.restapikotlin.constant.RequestURIConstants.API_BASE_URL
-import de.hexad.restapikotlin.constant.RequestURIConstants.HEALTH
+import de.hexad.restapikotlin.constant.RequestURIConstant.API_BASE_URL
+import de.hexad.restapikotlin.constant.RequestURIConstant.USER
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -26,14 +26,13 @@ internal class EmployeeControllerTest
     }
 
     @Test
-    fun `should return hello world`() {
+    fun `should redirect to azure login url`() {
         val response = restTemplate.getForEntity<String>(
-            "${getURL()}/$HEALTH",
+            "${getURL()}/$USER",
             String::class
         )
 
-        assertEquals(200, response.statusCode.value())
-        assertNotNull(response.body)
-        assertEquals("Hello! API Server", response.body)
+        assertEquals(302, response.statusCode.value())
+        assertNull(response.body)
     }
 }
