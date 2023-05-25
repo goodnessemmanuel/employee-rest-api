@@ -19,7 +19,7 @@ cd to this project directory and
 run: podman-compose -f docker-compose.yml up -d ::starts app
 
 podman ps ::to confirm container is running
-Goto http://localhost:8080/ to check app
+Goto http://localhost:8080/api/server/v1/user to check app
 
 podman-compose down ::removes and destroy container
 
@@ -31,5 +31,5 @@ install docker desktop if you don't have it already
 cd to this project directory and run: docker-compose up -d ::starts app with all dependencies
 
 docker ps ::to confirm container is running
-Goto http://localhost:8080/ to check app
+Goto http://localhost:8080/api/server/v1/user to check app
 docker-compose down
