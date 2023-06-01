@@ -4,6 +4,7 @@ import de.hexad.restapikotlin.constant.RequestURIConstant.LOGIN
 import de.hexad.restapikotlin.constant.RequestURIConstant.REGISTER
 import de.hexad.restapikotlin.domain.UserRequest
 import de.hexad.restapikotlin.domain.UserResponse
+import de.hexad.restapikotlin.exception.InvalidAuthenticationException
 import de.hexad.restapikotlin.service.UserService
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
@@ -25,13 +26,18 @@ class AuthController (private val userService: UserService) {
         val userResponse = userService.addUser(userRequest)
         val resourceURI = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}").buildAndExpand(userResponse.id).toUri()
-        logger.info("new user save: {}", userResponse)
+        logger.info("new user created: {}", userResponse)
         return ResponseEntity.created(resourceURI).body(userResponse)
     }
 
     @PostMapping(LOGIN)
     fun login(@RequestBody userRequest: UserRequest) :ResponseEntity<Any>{
-        userService.login(userRequest)
-        return ResponseEntity.ok("Login successful!")
+        return try {
+           val userResponse = userService.login(userRequest)
+            logger.info("user login request response: {}", userResponse)
+            ResponseEntity.ok(userResponse)
+        } catch (ex: InvalidAuthenticationException){
+           return ResponseEntity.badRequest().body(ex.message)
+        }
     }
 }

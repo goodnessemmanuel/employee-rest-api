@@ -9,5 +9,5 @@ import org.springframework.stereotype.Service
 interface UserService {
     fun findUserById(userId :String) :User
     fun addUser(userRequest: UserRequest) :UserResponse
-    fun login(userRequest: UserRequest) : User?
+    fun login(userRequest: UserRequest) : UserResponse?
 }

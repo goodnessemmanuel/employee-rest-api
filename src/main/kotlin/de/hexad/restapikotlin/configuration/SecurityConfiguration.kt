@@ -1,9 +1,13 @@
 package de.hexad.restapikotlin.configuration
 
+import de.hexad.restapikotlin.constant.RequestURIConstant.NG_LOCAL_URI
+import de.hexad.restapikotlin.constant.RequestURIConstant.REACT_LOCAL_URI
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import java.security.KeyPair
 import java.security.KeyPairGenerator
 
@@ -93,4 +97,21 @@ class SecurityConfiguration () {
     fun passwordEncoder() :BCryptPasswordEncoder{
         return BCryptPasswordEncoder()
     }
+    /**
+     * allow resource
+     * sharing for any
+     * app running on
+     * local URL
+     */
+    @Bean
+    fun corsConfigurer() : WebMvcConfigurer {
+        return object : WebMvcConfigurer {
+            override fun addCorsMappings(registry: CorsRegistry) {
+                registry
+                    .addMapping("*")
+                    .allowedOrigins(NG_LOCAL_URI, REACT_LOCAL_URI)
+            }
+        }
+    }
+
 }
