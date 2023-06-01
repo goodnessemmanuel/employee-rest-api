@@ -1,6 +1,18 @@
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    de.hexad.restapikotlin: DEBUG
+
 spring:
-  cloud:
-    azure:
-      active-directory:
-        enabled: true
-        redirect-uri-template: http://localhost:8080/login/oauth2/code/
+  data:
+    mongodb:
+      database: admin
+      host: localhost
+      username: admin
+      password: admin
+      port: 27017
+
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
