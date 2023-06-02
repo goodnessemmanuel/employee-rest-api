@@ -97,6 +97,7 @@ class SecurityConfiguration () {
     fun passwordEncoder() :BCryptPasswordEncoder{
         return BCryptPasswordEncoder()
     }
+
     /**
      * allow resource
      * sharing for any
