@@ -1,4 +1,4 @@
-package de.hexad.restapikotlin.domain
+package de.hexad.restapikotlin.domain.dto
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonInclude.Include

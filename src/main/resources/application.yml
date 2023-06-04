@@ -1,6 +1,6 @@
 logging:
   level:
-    org.springframework.web: DEBUG
+#    org.springframework.web: DEBUG
     org.springframework.security: DEBUG
     de.hexad.restapikotlin: DEBUG
 

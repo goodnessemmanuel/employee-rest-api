@@ -2,12 +2,14 @@ package de.hexad.restapikotlin.controller
 
 import de.hexad.restapikotlin.constant.RequestURIConstant.LOGIN
 import de.hexad.restapikotlin.constant.RequestURIConstant.REGISTER
-import de.hexad.restapikotlin.domain.UserRequest
-import de.hexad.restapikotlin.domain.UserResponse
+import de.hexad.restapikotlin.constant.RequestURIConstant.TOKEN_URI
+import de.hexad.restapikotlin.domain.dto.UserRequest
+import de.hexad.restapikotlin.domain.dto.UserResponse
 import de.hexad.restapikotlin.exception.InvalidAuthenticationException
 import de.hexad.restapikotlin.service.UserService
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 
@@ -17,7 +19,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
  * app integrity
  */
 @RestController
-class AuthController (private val userService: UserService) {
+class AuthController (
+    private val userService: UserService ) {
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
     @PostMapping(REGISTER)
@@ -30,14 +33,18 @@ class AuthController (private val userService: UserService) {
         return ResponseEntity.created(resourceURI).body(userResponse)
     }
 
+    @PostMapping(TOKEN_URI)
+    fun getAccessToken(authentication: Authentication?) :ResponseEntity<Any>{
+        return userService.createTokenToAccessApi(authentication)
+    }
     @PostMapping(LOGIN)
     fun login(@RequestBody userRequest: UserRequest) :ResponseEntity<Any>{
         return try {
-           val userResponse = userService.login(userRequest)
+            val userResponse = userService.login(userRequest)
             logger.info("user login request response: {}", userResponse)
             ResponseEntity.ok(userResponse)
         } catch (ex: InvalidAuthenticationException){
-           return ResponseEntity.badRequest().body(ex.message)
+            return ResponseEntity.badRequest().body(ex.message)
         }
     }
 }
