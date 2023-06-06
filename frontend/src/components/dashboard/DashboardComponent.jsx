@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import {useAuthContext } from "../../security/AuthContext"
 import { getDummyUsers } from "../../api/UserService"
@@ -7,9 +6,6 @@ export default function DashboardComponent(){
     const { username } = useParams()
     const authContext = useAuthContext()
 
-    useEffect(
-        () => handleTestEmployeeAPI()
-    )
 
    async function handleTestEmployeeAPI() {
         console.log("Testing api call...")
