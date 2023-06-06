@@ -1,5 +1,6 @@
 package de.hexad.restapikotlin.controller
 
+import de.hexad.restapikotlin.constant.RequestURIConstant.DUMMY
 import de.hexad.restapikotlin.constant.RequestURIConstant.LOGIN
 import de.hexad.restapikotlin.constant.RequestURIConstant.REGISTER
 import de.hexad.restapikotlin.constant.RequestURIConstant.TOKEN_URI
@@ -19,8 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
  * app integrity
  */
 @RestController
-class AuthController (
-    private val userService: UserService ) {
+class AuthController ( private val userService: UserService ) {
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
     @PostMapping(REGISTER)
@@ -46,5 +46,9 @@ class AuthController (
         } catch (ex: InvalidAuthenticationException){
             return ResponseEntity.badRequest().body(ex.message)
         }
+    }
+    @GetMapping(DUMMY)
+    fun testAuth() : ResponseEntity<List<String>>{
+      return  ResponseEntity.ok(listOf("Enenu", "Gift", "Thompson"))
     }
 }
